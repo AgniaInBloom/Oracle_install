@@ -81,7 +81,7 @@ su root
 pandora
 
 sh /u01/app/oraInventory/orainstRoot.sh
-/u01/app/oracle/product/12.2.0.1/dbhome_1/root.sh
+sh /u01/app/oracle/product/12.2.0.1/dbhome_1/root.sh
 
 su oracle 
 oracle4u
@@ -89,5 +89,16 @@ oracle4u
 cd /u01/app/oracle/product/12.2.0.1/dbhome_1/bin
 ./dbca -silent -createDatabase                   -templateName General_Purpose.dbc              -gdbName ${ORACLE_SID}                         -sid ${ORACLE_SID}                             -createAsContainerDatabase false               -emConfiguration NONE                          -datafileDestination /u01/db_files             -storageType FS                                -characterSet AL32UTF8                         -totalMemory 2048                              -recoveryAreaDestination /u01/FRA              -sampleSchema true
 
+Persik@2021
+Persik@2021
+Persik@2021
 
+cat /dev/null > /u01/app/oracle/product/12.2.0.1/dbhome_1/network/admin/samples/listener.ora
 
+cat > /u01/app/oracle/product/12.2.0.1/dbhome_1/network/admin/samples/listener.ora <<EOF
+ LISTENER =
+  (ADDRESS_LIST=
+(ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
+EOF
+
+netca -silent -responsefile /u01/app/oracle/product/12.2.0.1/dbhome_1/database/response/netca.rsp
