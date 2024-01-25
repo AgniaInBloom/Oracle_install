@@ -1,18 +1,19 @@
-yum update -y
-sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
-service iptables stop
+#yum update -y
+#sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+#service iptables stop
+yum install -y oracle-database-server-12cR2-preinstall
 mkdir -p /u01/app/oracle/product/12.2.0.1
 chown -R oracle:oinstall /u01
 chmod -R 775 /u01
-cat /dev/null > /etc/hosts
+#cat /dev/null > /etc/hosts
 
-cat > /etc/hosts <<EOF
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 pandora.krenger.local
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-EOF
+#cat > /etc/hosts <<EOF
+#127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 pandora.krenger.local
+#::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+#EOF
 
 su oracle
-oracle4u
+Persik@2021
 
 cd /home/oracle
 
@@ -76,19 +77,18 @@ oracle.installer.autoupdates.option=SKIP_UPDATES
 
 ###
 
-su root 
-pandora
+#su root 
+#Persik@2021
 
-sh /u01/app/oraInventory/orainstRoot.sh
-sh /u01/app/oracle/product/12.2.0.1/dbhome_1/root.sh
+#sh /u01/app/oraInventory/orainstRoot.sh
+#sh /u01/app/oracle/product/12.2.0.1/dbhome_1/root.sh
 
-su oracle 
-oracle4u
+#su oracle 
+#oracle4u
 
 cd /u01/app/oracle/product/12.2.0.1/dbhome_1/bin
 ./dbca -silent -createDatabase                   -templateName General_Purpose.dbc              -gdbName ${ORACLE_SID}                         -sid ${ORACLE_SID}                             -createAsContainerDatabase false               -emConfiguration NONE                          -datafileDestination /u01/db_files             -storageType FS                                -characterSet AL32UTF8                         -totalMemory 2048                              -recoveryAreaDestination /u01/FRA              -sampleSchema true
 
-Persik@2021
 Persik@2021
 Persik@2021
 
