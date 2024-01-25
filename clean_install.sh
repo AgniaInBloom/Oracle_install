@@ -5,6 +5,13 @@ service iptables disable
 mkdir -p /u01/app/oracle/product/12.2.0.1
 chown -R oracle:oinstall /u01
 chmod -R 775 /u01
+cat /dev/null > /etc/hosts
+
+cat > /etc/hosts <<EOF
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 pandora.krenger.local
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+EOF
+
 su oracle
 oracle4u
 
@@ -44,6 +51,7 @@ mkdir /u01/app/oracle/product/12.2.0.1/dbhome_1
 cd /u01/app/oracle/product/12.2.0.1/dbhome_1
 
 unzip -qo /tmp/V839960-01.zip
+export ORACLE_HOME=$ORACLE_BASE/product/12.2.0.1/dbhome_1
 cd $ORACLE_HOME/database
 
 ###
