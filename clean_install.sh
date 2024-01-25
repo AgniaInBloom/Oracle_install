@@ -1,7 +1,6 @@
 yum update -y
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 service iptables stop
-service iptables disable
 mkdir -p /u01/app/oracle/product/12.2.0.1
 chown -R oracle:oinstall /u01
 chmod -R 775 /u01
