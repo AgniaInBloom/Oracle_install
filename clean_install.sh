@@ -44,7 +44,7 @@ EOF
 . .bash_profile
 
 cd /tmp
-wget  ##Ссылка на архив исходника
+#wget  ##Ссылка на архив исходника
 
 mkdir /u01/app/oracle/product/12.2.0.1/dbhome_1
 cd /u01/app/oracle/product/12.2.0.1/dbhome_1
