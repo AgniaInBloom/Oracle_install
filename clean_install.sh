@@ -99,4 +99,4 @@ cat > /u01/app/oracle/product/12.2.0.1/dbhome_1/network/admin/samples/listener.o
 (ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
 EOF
 
-netca -silent -responsefile /u01/app/oracle/product/12.2.0.1/dbhome_1/database/response/netca.rsp
+./netca -silent -responsefile /u01/app/oracle/product/12.2.0.1/dbhome_1/database/response/netca.rsp
