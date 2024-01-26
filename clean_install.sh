@@ -13,7 +13,6 @@ chmod -R 775 /u01
 #EOF
 
 su oracle
-Persik@2021
 
 cd /home/oracle
 
@@ -45,7 +44,7 @@ EOF
 . .bash_profile
 
 cd /tmp
-#wget  ##Ссылка на архив исходника
+wget http://update.vgtele.com:22222/1alaris/Oracle_Database_12c_12.2.0.1.0/V839960-01.zip
 
 mkdir /u01/app/oracle/product/12.2.0.1/dbhome_1
 cd /u01/app/oracle/product/12.2.0.1/dbhome_1
