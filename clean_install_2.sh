@@ -1,8 +1,8 @@
-cd /home/oracle
-echo $USER
-cat /dev/null > .bash_profile
+runuser -l oracle -c 'cd /home/oracle'
+runuser -l oracle -c 'echo $USER'
+runuser -l oracle -c 'cat /dev/null > .bash_profile'
 
-cat > .bash_profile <<EOF 
+runuser -l oracle -c 'cat > .bash_profile <<EOF 
 ORACLE_BASE=/u01/app/oracle; export ORACLE_BASE
 ORACLE_HOME=$ORACLE_BASE/product/12.2.0.1/dbhome_1; export ORACLE_HOME
 ORACLE_SID=invoice; export ORACLE_SID
@@ -24,22 +24,23 @@ if [ $USER = "oracle" ]; then
         fi
 fi 
 EOF
+'
 
-. .bash_profile
+runuser -l oracle -c '. .bash_profile'
 
-cd /tmp
-wget http://update.vgtele.com:22222/1alaris/Oracle_Database_12c_12.2.0.1.0/V839960-01.zip
+runuser -l oracle -c 'cd /tmp'
+runuser -l oracle -c 'wget http://update.vgtele.com:22222/1alaris/Oracle_Database_12c_12.2.0.1.0/V839960-01.zip'
 
-mkdir /u01/app/oracle/product/12.2.0.1/dbhome_1
-cd /u01/app/oracle/product/12.2.0.1/dbhome_1
+runuser -l oracle -c 'mkdir /u01/app/oracle/product/12.2.0.1/dbhome_1'
+runuser -l oracle -c 'cd /u01/app/oracle/product/12.2.0.1/dbhome_1'
 
-unzip -qo /tmp/V839960-01.zip
-export ORACLE_HOME=$ORACLE_BASE/product/12.2.0.1/dbhome_1
-cd $ORACLE_HOME/database
+runuser -l oracle -c 'unzip -qo /tmp/V839960-01.zip'
+runuser -l oracle -c 'export ORACLE_HOME=$ORACLE_BASE/product/12.2.0.1/dbhome_1'
+runuser -l oracle -c 'cd $ORACLE_HOME/database'
 
 ###
 
-./runInstaller -ignoreSysPrereqs -showProgress -silent       \
+runuser -l oracle -c './runInstaller -ignoreSysPrereqs -showProgress -silent       \
 oracle.install.option=INSTALL_DB_SWONLY                      \
 ORACLE_HOSTNAME=${HOSTNAME}                                  \
 UNIX_GROUP_NAME=oinstall                                     \
@@ -57,7 +58,7 @@ oracle.install.db.OSRACDBA_GROUP=dba                         \
 SECURITY_UPDATES_VIA_MYORACLESUPPORT=false                   \
 DECLINE_SECURITY_UPDATES=true                                \
 oracle.installer.autoupdates.option=SKIP_UPDATES
-
+'
 ###
 
 #su root 
@@ -69,20 +70,20 @@ oracle.installer.autoupdates.option=SKIP_UPDATES
 #su oracle 
 #oracle4u
 
-cd /u01/app/oracle/product/12.2.0.1/dbhome_1/bin
-./dbca -silent -createDatabase                   -templateName General_Purpose.dbc              -gdbName ${ORACLE_SID}                         -sid ${ORACLE_SID}                             -createAsContainerDatabase false               -emConfiguration NONE                          -datafileDestination /u01/db_files             -storageType FS                                -characterSet AL32UTF8                         -totalMemory 2048                              -recoveryAreaDestination /u01/FRA              -sampleSchema true
+runuser -l oracle -c 'cd /u01/app/oracle/product/12.2.0.1/dbhome_1/bin'
+runuser -l oracle -c './dbca -silent -createDatabase                   -templateName General_Purpose.dbc              -gdbName ${ORACLE_SID}                         -sid ${ORACLE_SID}                             -createAsContainerDatabase false               -emConfiguration NONE                          -datafileDestination /u01/db_files             -storageType FS                                -characterSet AL32UTF8                         -totalMemory 2048                              -recoveryAreaDestination /u01/FRA              -sampleSchema true'
 
-Persik@2021
-Persik@2021
+runuser -l oracle -c 'Persik@2021'
+runuser -l oracle -c 'Persik@2021'
 
-cat /dev/null > /u01/app/oracle/product/12.2.0.1/dbhome_1/network/admin/samples/listener.ora
+runuser -l oracle -c 'cat /dev/null > /u01/app/oracle/product/12.2.0.1/dbhome_1/network/admin/samples/listener.ora'
 
-cat > /u01/app/oracle/product/12.2.0.1/dbhome_1/network/admin/samples/listener.ora <<EOF
+runuser -l oracle -c 'cat > /u01/app/oracle/product/12.2.0.1/dbhome_1/network/admin/samples/listener.ora <<EOF
  LISTENER =
   (ADDRESS_LIST=
 (ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
 EOF
-
-./netca -silent -responsefile /u01/app/oracle/product/12.2.0.1/dbhome_1/database/response/netca.rsp
+'
+runuser -l oracle -c './netca -silent -responsefile /u01/app/oracle/product/12.2.0.1/dbhome_1/database/response/netca.rsp'
 
 
