@@ -1,6 +1,6 @@
 cd /home/oracle
 echo $USER
-cat /dev/null > vi .bash_profile
+cat /dev/null > .bash_profile
 
 cat > .bash_profile <<EOF 
 ORACLE_BASE=/u01/app/oracle; export ORACLE_BASE
