@@ -14,4 +14,5 @@ chmod -R 775 /u01
 echo $USER file1
 cd /home/oracle
 wget https://raw.githubusercontent.com/AgniaInBloom/Oracle_install/main/clean_install_2.sh
+chmod 7777 clean_install_2.sh
 runuser -l oracle -c 'sh /home/oracle/clean_install_2.sh
